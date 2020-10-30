@@ -1,14 +1,14 @@
 {
-  "name": "react-native-splash-screen",
-  "version": "3.2.0",
-  "description": "A splash screen for react-native, hide when application loaded ,it works on iOS and Android.",
+  "name": "react-native-lottie-splash-screen",
+  "version": "0.1.0",
+  "description": "A lottie splash screen for react-native, hide when application loaded ,it works on iOS and Android.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crazycodeboy/react-native-splash-screen.git"
+    "url": "git+https://github.com/hypermoney/react-native-splash-screen.git"
   },
   "keywords": [
     "react-native",
@@ -22,13 +22,16 @@
     "android",
     "ios"
   ],
-  "author": "crazycodeboy",
+  "contributors": [
+    "TaehyunHwang <taehyun_hwang@tmax.co.kr>",
+    "JoongseopWon <joongseop_won@tmax.co.kr>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/crazycodeboy/react-native-splash-screen/issues"
+    "url": "https://github.com/hypermoney/react-native-splash-screen/issues"
   },
   "peerDependencies": {
     "react-native": ">=0.57.0"
   },
-  "homepage": "https://github.com/crazycodeboy/react-native-splash-screen#readme"
+  "homepage": "https://github.com/hypermoney/react-native-splash-screen#readme"
 }
