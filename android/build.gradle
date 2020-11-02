@@ -30,4 +30,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation "com.android.support:appcompat-v7:$supportLibVersion"
     implementation "com.facebook.react:react-native:+" // From node_modules
+    implementation 'com.airbnb.android:lottie:3.4.4'
 }
