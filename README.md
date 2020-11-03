@@ -1,12 +1,9 @@
 # react-native-lottie-splash-screen
 
 [![Download](https://img.shields.io/badge/Download-v3.2.0-ff69b4.svg) ](https://www.npmjs.com/package/react-native-lottie-splash-screen)
-[ ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/crazycodeboy/react-native-lottie-splash-screen/pulls)
-[ ![react-native-lottie-splash-screen release](https://img.shields.io/github/release/crazycodeboy/react-native-lottie-splash-screen.svg?maxAge=2592000?style=flat-square)](https://github.com/crazycodeboy/GitHubPopular/releases)
-[ ![语言 中文](https://img.shields.io/badge/语言-中文-feb252.svg)](https://github.com/crazycodeboy/react-native-lottie-splash-screen/blob/master/README.zh.md)
+[ ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg)](https://github.com/HwangTaehyun/react-native-lottie-splash-screen/pulls)
+[ ![react-native-lottie-splash-screen release](https://img.shields.io/github/release/HwangTaehyun/react-native-lottie-splash-screen.svg?maxAge=2592000?style=flat-square)](https://github.com/crazycodeboy/GitHubPopular/releases)
 [![License MIT](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](https://raw.githubusercontent.com/crazycodeboy/react-native-check-box/master/LICENSE)
-[ ![原理 解析](https://img.shields.io/badge/原理-解析-brightgreen.svg)](https://github.com/crazycodeboy/RNStudyNotes/blob/master/React%20Native%20%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E5%90%88%E9%9B%86/React%20Native%20%E5%90%AF%E5%8A%A8%E7%99%BD%E5%B1%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%95%99%E7%A8%8B/React%20Native%20%E5%90%AF%E5%8A%A8%E7%99%BD%E5%B1%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%95%99%E7%A8%8B.md)
-[ ![Flutter](https://img.shields.io/badge/Flutter-brightgreen.svg)](https://github.com/crazycodeboy/flutter_splash_screen)
 
 Fork of [react-native-splash-screen](https://github.com/crazycodeboy/react-native-splash-screen) and add implement for animation splash screen using airbnb lottie files.
 
@@ -14,15 +11,13 @@ Works on IOS and Android.
 
 ## Content
 
-- [Changes](#changes)
+- [Examples](#examples)
 - [Installation](#installation)
 - [Getting started](#getting-started)
 - [API](#api)
 - [Contribution](#contribution)
 
-## Changes
-
-For React Native >= 0.47.0 use [v3.+](https://github.com/crazycodeboy/react-native-lottie-splash-screen/releases), for React Native < 0.47.0 use [v2.1.0](https://github.com/crazycodeboy/react-native-lottie-splash-screen/releases/tag/v1.0.9)
+## Examples
 
 ![react-native-lottie-splash-screen-Android](screenshot/Lottie-Splash-Screen-Android.gif)
 ![react-native-lottie-splash-screen-iOS](screenshot/Lottie-Splash-Screen-IOS.gif)
@@ -297,4 +292,4 @@ Pull requests are welcome. If you want to change the API or do something big it 
 
 ---
 
-**[MIT Licensed](https://github.com/hypermoney/react-native-lottie-splash-screen/blob/master/LICENSE)**
+**[MIT Licensed](https://github.com/HwangTaehyun/react-native-lottie-splash-screen/blob/master/LICENSE)**
