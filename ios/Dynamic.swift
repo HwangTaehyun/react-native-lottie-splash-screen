@@ -9,14 +9,18 @@ import Lottie
 
   @objc func createAnimationView(rootView: UIView, lottieName: String) -> AnimationView {
     let animationView = AnimationView(name: lottieName)
-    animationView.frame = rootView.frame // 애니메이션뷰의 크기 설정
+    animationView.frame = rootView.frame
     animationView.center = rootView.center
-    animationView.backgroundColor = UIColor.red;
+    animationView.backgroundColor = UIColor.white;
     return animationView;
   }
 
   @objc func play(animationView: AnimationView) {
-    animationView.play();
+    animationView.play(
+      completion: { (success) in
+        RNSplashScreen.setAnimationFinished(true)
+      }
+    );
   }
 }
 

@@ -11,6 +11,7 @@
 #import <React/RCTBridge.h>
 
 static bool waiting = true;
+static bool isAnimationFinished = false;
 static bool addedJsLoadErrorObserver = false;
 static UIView* loadingView = nil;
 
@@ -60,11 +61,24 @@ RCT_EXPORT_MODULE(SplashScreen)
       waiting = false;
     });
   } else {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)),
-                   dispatch_get_main_queue(), ^{
-                     [loadingView removeFromSuperview];
-                   });
+    waiting = true;
+      if (isAnimationFinished) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)),
+                       dispatch_get_main_queue(), ^{
+                         [loadingView removeFromSuperview];
+                       });
+      }
   }
+}
+
++ (void)setAnimationFinished:(Boolean)flag {
+    isAnimationFinished = true;
+    if (waiting) {
+      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)),
+                     dispatch_get_main_queue(), ^{
+                       [loadingView removeFromSuperview];
+                     });
+    }
 }
 
 + (void)jsLoadError:(NSNotification*)notification {

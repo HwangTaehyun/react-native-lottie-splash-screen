@@ -189,9 +189,6 @@ public class MainActivity extends ReactActivity {
 3. Create `Dynamic.Swift` with the following contents:
 
 ```swift
-//  Dynamic.swift
-//  Created by Taehyun Hwang on 2020/10/29.
-
 import UIKit
 import Foundation
 import Lottie
@@ -202,15 +199,18 @@ import Lottie
     let animationView = AnimationView(name: lottieName)
     animationView.frame = rootView.frame
     animationView.center = rootView.center
-    animationView.backgroundColor = UIColor.red;
+    animationView.backgroundColor = UIColor.white;
     return animationView;
   }
 
   @objc func play(animationView: AnimationView) {
-    animationView.play();
+    animationView.play(
+      completion: { (success) in
+        RNSplashScreen.setAnimationFinished(true)
+      }
+    );
   }
 }
-
 ```
 
 ## Getting started
