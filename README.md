@@ -172,7 +172,7 @@ public class MainActivity extends ReactActivity {
 }
 ```
 
-2. Create `[your-project-name]-Bridging-Header.h` with the following additions:
+2. Create `[your-project-name]-Bridging-Header.h` with the following contents:
 
 ```objc
 //  HyperMoney-Bridging-Header.h
@@ -183,6 +183,33 @@ public class MainActivity extends ReactActivity {
 #import "RNSplashScreen.h" // here
 
 #endif /* HyperMoney_Bridging_Header_h */
+
+```
+
+3. Create `Dynamic.Swift` with the following contents:
+
+```swift
+//  Dynamic.swift
+//  Created by Taehyun Hwang on 2020/10/29.
+
+import UIKit
+import Foundation
+import Lottie
+
+@objc class Dynamic: NSObject {
+
+  @objc func createAnimationView(rootView: UIView, lottieName: String) -> AnimationView {
+    let animationView = AnimationView(name: lottieName)
+    animationView.frame = rootView.frame
+    animationView.center = rootView.center
+    animationView.backgroundColor = UIColor.red;
+    return animationView;
+  }
+
+  @objc func play(animationView: AnimationView) {
+    animationView.play();
+  }
+}
 
 ```
 
