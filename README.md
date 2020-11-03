@@ -115,7 +115,8 @@ import org.devio.rn.splashscreen.SplashScreen; // here
 public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    SplashScreen.show(this, R.id.lottie);
+    SplashScreen.show(this, R.id.lottie); // here
+    SplashScreen.setAnimationFinished(true); // If you want the animation dialog to be forced to close when hide is called, use this code
     super.onCreate(savedInstanceState);
     // ...other code
   }
@@ -161,6 +162,10 @@ public class MainActivity extends ReactActivity {
 
   // play
   [t playWithAnimationView:animationView];
+
+  // If you want the animation layout to be forced to remove when hide is called, use this code
+  [RNSplashScreen setAnimationFinished:true];
+
   /* here */
 
   return YES;
