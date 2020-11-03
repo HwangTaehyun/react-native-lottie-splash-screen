@@ -129,7 +129,7 @@ public class MainActivity extends ReactActivity {
 
 **iOS:**
 
-Update `AppDelegate.m` with the following additions:
+1. Update `AppDelegate.m` with the following additions:
 
 ```obj-c
 
@@ -170,6 +170,20 @@ Update `AppDelegate.m` with the following additions:
 
   return YES;
 }
+```
+
+2. Create `[your-project-name]-Bridging-Header.h` with the following additions:
+
+```objc
+//  HyperMoney-Bridging-Header.h
+
+#ifndef HyperMoney_Bridging_Header_h
+#define HyperMoney_Bridging_Header_h
+
+#import "RNSplashScreen.h" // here
+
+#endif /* HyperMoney_Bridging_Header_h */
+
 ```
 
 ## Getting started
