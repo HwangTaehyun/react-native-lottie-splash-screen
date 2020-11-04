@@ -125,7 +125,58 @@ public class MainActivity extends ReactActivity {
 
 **iOS:**
 
-1. Update `AppDelegate.m` with the following additions:
+1. Create `Dynamic.Swift` with the following contents:
+
+```swift
+import UIKit
+import Foundation
+import Lottie
+
+@objc class Dynamic: NSObject {
+
+  @objc func createAnimationView(rootView: UIView, lottieName: String) -> AnimationView {
+    let animationView = AnimationView(name: lottieName)
+    animationView.frame = rootView.frame
+    animationView.center = rootView.center
+    animationView.backgroundColor = UIColor.white;
+    return animationView;
+  }
+
+  @objc func play(animationView: AnimationView) {
+    animationView.play(
+      completion: { (success) in
+        RNSplashScreen.setAnimationFinished(true)
+      }
+    );
+  }
+}
+```
+
+2. Create `[your-project-name]-Bridging-Header.h` with the following contents:
+
+```objc
+//  HyperMoney-Bridging-Header.h
+
+#ifndef HyperMoney_Bridging_Header_h
+#define HyperMoney_Bridging_Header_h
+
+#import "RNSplashScreen.h" // here
+
+#endif /* HyperMoney_Bridging_Header_h */
+
+```
+
+3. To use swift file in AppDelegate.m, follow next step.
+
+[https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_swift_into_objective-c](https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_swift_into_objective-c)
+
+> Import Swift code into Objective-C within the same framework:\
+> \
+> Under Build Settings, in Packaging, make sure the Defines Module setting for that framework target is set to Yes.\
+> \
+> Import the Swift code from that framework target into any Objective-C .m file within that target using this syntax and substituting the appropriate names:
+
+4. Update `AppDelegate.m` with the following additions:
 
 ```obj-c
 
@@ -169,47 +220,6 @@ public class MainActivity extends ReactActivity {
   /* here */
 
   return YES;
-}
-```
-
-2. Create `[your-project-name]-Bridging-Header.h` with the following contents:
-
-```objc
-//  HyperMoney-Bridging-Header.h
-
-#ifndef HyperMoney_Bridging_Header_h
-#define HyperMoney_Bridging_Header_h
-
-#import "RNSplashScreen.h" // here
-
-#endif /* HyperMoney_Bridging_Header_h */
-
-```
-
-3. Create `Dynamic.Swift` with the following contents:
-
-```swift
-import UIKit
-import Foundation
-import Lottie
-
-@objc class Dynamic: NSObject {
-
-  @objc func createAnimationView(rootView: UIView, lottieName: String) -> AnimationView {
-    let animationView = AnimationView(name: lottieName)
-    animationView.frame = rootView.frame
-    animationView.center = rootView.center
-    animationView.backgroundColor = UIColor.white;
-    return animationView;
-  }
-
-  @objc func play(animationView: AnimationView) {
-    animationView.play(
-      completion: { (success) in
-        RNSplashScreen.setAnimationFinished(true)
-      }
-    );
-  }
 }
 ```
 
