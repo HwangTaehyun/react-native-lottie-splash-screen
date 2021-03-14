@@ -32,7 +32,10 @@ Run `npm i react-native-lottie-splash-screen --save`
 
 #### Automatic installation
 
-`react-native link react-native-lottie-splash-screen` or `rnpm link react-native-lottie-splash-screen`
+* NOTE: For react-native version => 0.60 you don't need to run `react-native link` auto linking will do the job just fine.
+
+`react-native 
+react-native-lottie-splash-screen` or `rnpm link react-native-lottie-splash-screen`
 
 #### Manual installation
 
