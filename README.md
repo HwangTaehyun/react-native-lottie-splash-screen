@@ -26,18 +26,34 @@ Works on IOS and Android.
 
 ### First step(Download):
 
-Run `npm i react-native-lottie-splash-screen --save`
+Run `npm i react-native-lottie-splash-screen --save` or `yarn add react-native-lottie-splash-screen`
 
 ### Second step(Plugin Installation):
 
-#### Automatic installation
+### React Native v0.60+
 
-* NOTE: For react-native version => 0.60 you don't need to run `react-native link` auto linking will do the job just fine.
+The package is [automatically linked](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) when building the app. All you need to do is:
 
-`react-native 
-react-native-lottie-splash-screen` or `rnpm link react-native-lottie-splash-screen`
+```bash
+cd ios && pod install
+```
 
-#### Manual installation
+For android, the package will be linked automatically on build.
+
+<details>
+ <summary>For React Native version 0.59 or older</summary>
+
+### React Native <= v0.59
+
+```bash
+react-native link react-native-lottie-splash-screen
+```
+
+If you don't want to use the methods above, you can always do Manual installation.
+
+</details>
+
+### Manual installation
 
 **Android:**
 
