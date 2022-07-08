@@ -224,11 +224,14 @@ import Lottie
   [self.window makeKeyAndVisible];
 
   Dynamic *t = [Dynamic new];
-  UIView *animationView = [t createAnimationViewWithRootView:rootView lottieName:@"loading"]; // change lottieName to your lottie files name
+  UIView *animationUIView = (UIView *)[t createAnimationViewWithRootView:rootView lottieName:@"loading"]; // change lottieName to your lottie files name
   animationView.backgroundColor = [UIColor whiteColor]; // change backgroundColor
 
   // register LottieSplashScreen to RNSplashScreen
   [RNSplashScreen showLottieSplash:animationView inRootView:rootView];
+
+  // casting UIView type to AnimationView type
+  AnimationView *animationView = (AnimationView *) animationUIView;
 
   // play
   [t playWithAnimationView:animationView];
