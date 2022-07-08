@@ -130,6 +130,7 @@ Update the `MainActivity.java` to use `react-native-lottie-splash-screen` via th
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen; // here
+import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
   @Override
