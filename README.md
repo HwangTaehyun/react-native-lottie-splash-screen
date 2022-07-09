@@ -26,7 +26,7 @@ Works on IOS and Android.
 
 ### First step(Download):
 
-Run `npm i react-native-lottie-splash-screen --save` or `yarn add react-native-lottie-splash-screen`
+Run `yarn add lottie-ios@3.2.3 react-native-lottie-splash-screen`
 
 ### Second step(Plugin Installation):
 
@@ -290,7 +290,10 @@ You can create splash screens in the following folders:
 
 ### iOS
 
-Drag your lottie files to Xcode Project. That's all.
+Drag your lottie files to Xcode Project. Click Finish. That's all.
+
+![](img/2022-07-09-16-40-46.png)
+![](img/2022-07-09-16-41-45.png)
 
 ## Usage
 
@@ -302,12 +305,12 @@ The contents of the App.js may be the following:
 
 ```js
 import React, { useEffect } from "react";
-import SplashScreen from "react-native-lottie-splash-screen";
+import LottieSplashScreen from "react-native-lottie-splash-screen";
 import RootNavigator from "@navi/RootNavigator";
 
 const App = () => {
   useEffect(() => {
-    SplashScreen.hide(); // here
+    LottieSplashScreen.hide(); // here
   }, []);
   return <RootNavigator />;
 };
