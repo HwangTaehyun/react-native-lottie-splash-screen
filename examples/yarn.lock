@@ -5442,7 +5442,10 @@ react-native-gradle-plugin@^0.0.7:
   integrity sha512-+4JpbIx42zGTONhBTIXSyfyHICHC29VTvhkkoUOJAh/XHPEixpuBduYgf6Y4y9wsN1ARlQhBBoptTvXvAFQf5g==
 
 "react-native-lottie-splash-screen@file:..":
-  version "0.2.1"
+  version "1.0.0"
+  dependencies:
+    lottie-ios "3.2.3"
+    lottie-react-native "^5.1.3"
 
 react-native-safe-modules@^1.0.3:
   version "1.0.3"

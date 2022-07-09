@@ -37,5 +37,9 @@
   "peerDependencies": {
     "react-native": ">=0.57.0"
   },
-  "homepage": "https://github.com/HwangTaehyun/react-native-lottie-splash-screen#readme"
+  "homepage": "https://github.com/HwangTaehyun/react-native-lottie-splash-screen#readme",
+  "dependencies": {
+    "lottie-ios": "3.2.3",
+    "lottie-react-native": "^5.1.3"
+  }
 }
