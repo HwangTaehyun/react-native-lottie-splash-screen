@@ -19,6 +19,8 @@ Works on IOS and Android.
 
 ## Examples
 
+You can run [examples](https://github.com/HwangTaehyun/react-native-lottie-splash-screen/tree/master/examples) in this project
+
 ![react-native-lottie-splash-screen-Android](screenshot/Lottie-Splash-Screen-Android.gif)
 ![react-native-lottie-splash-screen-iOS](screenshot/Lottie-Splash-Screen-IOS.gif)
 
@@ -299,7 +301,7 @@ Drag your lottie files to Xcode Project. Click Finish. That's all.
 
 Use like so:
 
-When the app is finished loading, hide the SplashScreen.
+When the app is finished loading, hide the LottieSplashScreen.
 
 The contents of the App.js may be the following:
 
@@ -322,8 +324,7 @@ export default App;
 
 | Method | Type     | Optional | Description                         |
 | ------ | -------- | -------- | ----------------------------------- |
-| show() | function | false    | Open splash screen (Native Method ) |
-| hide() | function | false    | Close splash screen                 |
+| hide() | function | false    | Close lottie splash screen          |
 
 ## Contribution
 
