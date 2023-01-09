@@ -147,7 +147,7 @@ public class MainActivity extends ReactActivity {
 
 **iOS:**
 
-1. Create `Dynamic.Swift` with the following contents:
+1. Create `Dynamic.swift` with the following contents:
 
 ```swift
 import UIKit
