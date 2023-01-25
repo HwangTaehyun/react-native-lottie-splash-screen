@@ -297,6 +297,36 @@ Drag your lottie files to Xcode Project. Click Finish. That's all.
 ![](img/2022-07-09-16-40-46.png)
 ![](img/2022-07-09-16-41-45.png)
 
+## Expo bare workflow!!
+
+It's really annoying to resolve issues with expo bare workflow because I do not use this 🥲. But a lot of developers want to use this project to expo bare workflow. So, If you managed to this, please star and follow me. That's a really big energy to me! :rocket::rocket::rocket:
+
+1. You should use XCode 14.2 because there's some build issue.
+
+- https://github.com/expo/expo/issues/20777
+
+2. If you had the following issue, you will resolve it with this [strategy](https://github.com/HwangTaehyun/react-native-lottie-splash-screen/discussions/64).
+
+```
+"Cannot find 'RNSplashScreen' in scope - Build iOS error" issue in Dynamic.swift #
+```
+
+3. You should insert the following code to AppDelegate.mm. Refer to this [issue](https://github.com/expo/expo/issues/17705)
+
+```m
+#import "RNSplashScreen.h" // here
+#import "ExpoModulesCore-Swift.h" // here
+#import "ExpoLSSTestApp-Swift.h" // here, change project name to yours
+```
+
+4. If you want to test in release mode, you
+   should add this line to scripts in your package.json file. Once you run this script, you can build:release in Xcode!
+
+```js
+"build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'"
+j
+```
+
 ## Usage
 
 Use like so:
@@ -322,9 +352,9 @@ export default App;
 
 ## API
 
-| Method | Type     | Optional | Description                         |
-| ------ | -------- | -------- | ----------------------------------- |
-| hide() | function | false    | Close lottie splash screen          |
+| Method | Type     | Optional | Description                |
+| ------ | -------- | -------- | -------------------------- |
+| hide() | function | false    | Close lottie splash screen |
 
 ## Contribution
 
