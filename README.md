@@ -299,7 +299,7 @@ Drag your lottie files to Xcode Project. Click Finish. That's all.
 
 ## Expo bare workflow!!
 
-It's really annoying to resolve issues with expo bare workflow because I do not use this 🥲. But a lot of developers want to use this project to expo bare workflow. So, If you managed to this, please star and follow me. That's a really big energy to me! :rocket::rocket::rocket:
+It's really annoying to resolve issues with expo bare workflow because I do not use this 🥲. But a lot of developers want to use this project to expo bare workflow. So, If you managed to this, please star and share this project! That's a really big energy to me! :rocket::rocket::rocket:
 
 1. You should use XCode 14.2 because there's some build issue.
 
@@ -355,6 +355,20 @@ export default App;
 | Method | Type     | Optional | Description                |
 | ------ | -------- | -------- | -------------------------- |
 | hide() | function | false    | Close lottie splash screen |
+
+## :sparkling_heart: Support the project
+
+I open-source almost everything I can and try to reply to everyone needing help using these projects. Obviously,
+this takes time. You can use this service for free.
+
+However, if you are using this project and are happy with it or just want to encourage me to continue creating stuff, there are a few ways you can do it:
+
+-   Starring and sharing the project :rocket:
+-   You can make one-time donations via buymeacoffee. I'll probably buy a coffee! :coffee:
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/eeht17173)
+
+Thanks! :heart:
 
 ## Contribution
 
