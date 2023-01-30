@@ -198,7 +198,7 @@ import Lottie
 > \
 > Import the Swift code from that framework target into any Objective-C .m file within that target using this syntax and substituting the appropriate names:
 
-4. Update `AppDelegate.m` with the following additions:
+4. Update `AppDelegate.mm` with the following additions: (for react-native@0.71 proceed to 4.1)
 
 ```obj-c
 
@@ -247,7 +247,43 @@ import Lottie
   return YES;
 }
 ```
+4.1  For React-Native version 0.71, in `AppDelegate.mm` rootView is no longer here. We need access to the rootView.
 
+```
+ - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  self.moduleName = @"YOUR_PROJECT_NAME";
+  // You can add your custom initial props in the dictionary below.
+  // They will be passed down to the ViewController used by React Native.
+  self.initialProps = @{};
+  // return [super application:application didFinishLaunchingWithOptions:launchOptions]; //This will be assigned as success instead
+ 
+ BOOL success = [super application:application didFinishLaunchingWithOptions:launchOptions];
+ 
+  if (success) {
+    //This is where we will put the logic to get access to rootview
+    UIView *rootView = self.window.rootViewController.view;
+    
+    rootView.backgroundColor = [UIColor whiteColor]; // change with your desired backgroundColor
+ 
+    Dynamic *t = [Dynamic new];
+    UIView *animationUIView = (UIView *)[t createAnimationViewWithRootView:rootView lottieName:@"logo_animated"]; // change lottieName to your lottie files name
+ 
+    // register LottieSplashScreen to RNSplashScreen
+    [RNSplashScreen showLottieSplash:animationUIView inRootView:rootView];
+    // casting UIView type to AnimationView type
+    AnimationView *animationView = (AnimationView *) animationUIView;
+    // play
+    [t playWithAnimationView:animationView];
+    // If you want the animation layout to be forced to remove when hide is called, use this code
+    [RNSplashScreen setAnimationFinished:true];
+  }
+ 
+  return success;
+ 
+}
+```
+ 
 ## Getting started
 
 Import `react-native-lottie-splash-screen` in your JS file.
