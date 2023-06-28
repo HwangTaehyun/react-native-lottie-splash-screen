@@ -174,6 +174,37 @@ import Lottie
 }
 ```
 
+> If you use lottie-ios version >= 4.0.1
+
+```swift
+import UIKit
+import Foundation
+import Lottie
+
+@objc class Dynamic: NSObject {
+
+  @objc func createAnimationView(rootView: UIView, lottieName: String) -> LottieAnimationView {
+    let animationView = LottieAnimationView(name: lottieName)
+    animationView.frame = rootView.frame
+    animationView.center = rootView.center
+    if #available(iOS 13, *) {
+      animationView.backgroundColor = UIColor.systemBackground;
+    } else {
+      animationView.backgroundColor = UIColor.clear;
+    }
+    return animationView;
+  }
+
+  @objc func play(animationView: LottieAnimationView) {
+    animationView.play(
+      completion: { (success) in
+        RNSplashScreen.setAnimationFinished(true)
+      }
+    );
+  }
+}
+```
+
 2. Create `[your-project-name]-Bridging-Header.h` with the following contents:
 
 ```objc
@@ -263,11 +294,17 @@ import Lottie
   if (success) {
     //This is where we will put the logic to get access to rootview
     UIView *rootView = self.window.rootViewController.view;
-    
-    rootView.backgroundColor = [UIColor whiteColor]; // change with your desired backgroundColor
  
     Dynamic *t = [Dynamic new];
     UIView *animationUIView = (UIView *)[t createAnimationViewWithRootView:rootView lottieName:@"logo_animated"]; // change lottieName to your lottie files name
+
+    BOOL closeWhenAnimationFinished = true;
+
+    if (@available(iOS 13.0, *)) {
+      closeWhenAnimationFinished = false;
+    } else {
+      closeWhenAnimationFinished = true;
+    }
  
     // register LottieSplashScreen to RNSplashScreen
     [RNSplashScreen showLottieSplash:animationUIView inRootView:rootView];
@@ -276,7 +313,7 @@ import Lottie
     // play
     [t playWithAnimationView:animationView];
     // If you want the animation layout to be forced to remove when hide is called, use this code
-    [RNSplashScreen setAnimationFinished:true];
+    [RNSplashScreen setAnimationFinished:closeWhenAnimationFinished];
   }
  
   return success;
