@@ -284,6 +284,7 @@ import Lottie
 }
 ```
 4.2 If your `AppDelegate.swift` is in `swift`:
+
 ```
   let rootViewController = UIViewController()
   rootViewController.view = rootView
@@ -300,7 +301,7 @@ import Lottie
   animationUIView.frame = rootView.frame
   t.play(animationView: animationUIView as! AnimationView)
   // end
-  
+
   return true
 ```
 ## Getting started
