@@ -283,7 +283,26 @@ import Lottie
  
 }
 ```
- 
+4.2 If your `AppDelegate.swift` is in `swift`:
+```
+  let rootViewController = UIViewController()
+  rootViewController.view = rootView
+  rootWindow.rootViewController = rootViewController
+  rootWindow.makeKeyAndVisible()
+
+  // start
+  let t = Dynamic()
+  let animationUIView: UIView = t.createAnimationView(rootView: rootView, lottieName:"Your_lottie_animation")
+
+  RNSplashScreen.showLottieSplash(animationUIView, inRootView: rootView)
+  
+  RNSplashScreen.setAnimationFinished(true)
+  animationUIView.frame = rootView.frame
+  t.play(animationView: animationUIView as! AnimationView)
+  // end
+  
+  return true
+```
 ## Getting started
 
 Import `react-native-lottie-splash-screen` in your JS file.
