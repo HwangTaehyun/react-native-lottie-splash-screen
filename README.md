@@ -297,9 +297,9 @@ import Lottie
 
   RNSplashScreen.showLottieSplash(animationUIView, inRootView: rootView)
   
-  RNSplashScreen.setAnimationFinished(true)
   animationUIView.frame = rootView.frame
   t.play(animationView: animationUIView as! AnimationView)
+  RNSplashScreen.setAnimationFinished(true)
   // end
 
   return true
