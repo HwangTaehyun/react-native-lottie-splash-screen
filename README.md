@@ -26,9 +26,202 @@ You can run [examples](https://github.com/HwangTaehyun/react-native-lottie-splas
 
 ## Installation
 
+### Versions compatibilities
+| React Native | react-native-lottie-splash-screen |
+|---|---|
+| >= 0.7x | 2.x |
+| < 0.70 | 1.x |
+#### Warning: Version 2.x has no backward compatibility. You need to follow the new setup instructions.
+
+## React-Native >= 0.70
+### First step (Download):
+Run `yarn add lottie-react-native@6.7.2 react-native-lottie-splash-screen`
+
+### Second step (Plugin Installation):
+
+The package is [automatically linked](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) when building the app. All you need to do is:
+
+```bash
+cd ios && pod install
+```
+
+For android, the package will be linked automatically on build.
+
+### Third step (Adding Splash Screen To Native Code):
+
+**Android:**
+
+1. Update the `MainActivity.kt` file to use `react-native-lottie-splash-screen` via the following changes:
+
+```kotlin
+// React-Native >= 0.70
+// MainActivity.kt file contents
+package com.examples
+
+import com.facebook.react.ReactActivity
+import com.facebook.react.ReactActivityDelegate
+import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
+import com.facebook.react.defaults.DefaultReactActivityDelegate
+
+import org.devio.rn.splashscreen.SplashScreen // Add this Line to your project
+import android.os.Bundle
+
+class MainActivity : ReactActivity() {
+
+  /* Add this function to your project */
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    SplashScreen.show(this, R.style.SplashScreen_SplashTheme, R.id.lottie)
+    // Skip waiting for the Lottie animation to finish
+    // To make the splash screen wait for the Lottie animation to finish set it to false
+    SplashScreen.setAnimationFinished(true)
+  }
+  /* End */
+
+
+  override fun getMainComponentName(): String = "examples"
+
+  override fun createReactActivityDelegate(): ReactActivityDelegate =
+      DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+
+}
+
+```
+
+2. Update `styles.xml` file in `app/src/main/res/values` and add these styles:
+
+```xml
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+    </style>
+    <!-- Copy these lines to you project. -->
+    <style name="SplashScreen_SplashAnimation">
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="SplashScreen_SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/SplashScreen_SplashAnimation</item>
+    </style>
+    <!-- End of copy -->
+</resources>
+
+```
+
+**iOS:**
+
+1. In Xcode open the `ios` folder > in Project Explorer> right click on your project name > `New File...` menu > select `Swift File` > Next > Type `Dynamic.swift` as the file name and select your project in `Targets` > Create.
+Copy these codes into `Dynamic.swift` file:
+
+```swift
+// React-Native >= 0.70
+// Dynamic.swift file content
+import UIKit
+import Foundation
+import Lottie
+
+@objc class Dynamic: NSObject {
+
+  @objc func createAnimationView(rootView: UIView, lottieName: String) -> LottieAnimationView {
+    let animationView = LottieAnimationView(name: lottieName)
+    animationView.frame = rootView.frame
+    animationView.center = rootView.center
+    animationView.backgroundColor = UIColor.white;
+    return animationView;
+  }
+
+  @objc func play(animationView: LottieAnimationView) {
+    animationView.play(
+      completion: { (success) in
+        RNSplashScreen.setAnimationFinished(true)
+      }
+    );
+  }
+}
+
+
+```
+
+2. Xcode asks you to create the bridge header. Accept it. The content of `[your-project-name]-Bridging-Header.h` would be like this:
+
+```objc
+// React-Native >= 0.70
+// [your-project-name]-Bridging-Header.h file content
+
+
+//  [your-project-name]-Bridging-Header.h
+
+#ifndef [your-project-name]_Bridging_Header_h
+#define [your-project-name]_Bridging_Header_h
+
+#import "RNSplashScreen.h" // here
+
+#endif /* [your-project-name]_Bridging_Header_h */
+
+
+```
+
+3. Update `AppDelegate.mm` with the following additions: (for react-native@0.71 proceed to 4.1)
+
+```obj-c
+// React-Native >= 0.70
+// AppDelegate.mm file content
+
+#import "AppDelegate.h"
+#import <React/RCTBundleURLProvider.h>
+
+#import "RNSplashScreen.h" // Copy This line to your project
+#import "[your-project-name]-Swift.h" // Replace [your-project-name] with your project name
+
+@implementation AppDelegate
+
+// REPLACE application METHOD FROM HERE
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  [FIRApp configure];
+  self.moduleName = @"[your-project-name]"; // Replace [your-project-name] with your project name
+  self.initialProps = @{};
+  // return [super application:application didFinishLaunchingWithOptions:launchOptions]; //This will be assigned as success instead
+ 
+  BOOL success = [super application:application didFinishLaunchingWithOptions:launchOptions];
+ 
+  if (success) {
+    //This is where we will put the logic to get access to rootview
+    UIView *rootView = self.window.rootViewController.view;
+    
+    rootView.backgroundColor = [UIColor whiteColor]; // change with your desired backgroundColor
+ 
+    Dynamic *t = [Dynamic new];
+    UIView *animationUIView = (UIView *)[t createAnimationViewWithRootView:rootView lottieName:@"loading"]; // change lottieName to your lottie files name
+    animationUIView.layer.zPosition = 1;
+ 
+    // register LottieSplashScreen to RNSplashScreen
+    [RNSplashScreen showLottieSplash:animationUIView inRootView:rootView];
+    // casting UIView type to AnimationView type
+    LottieAnimationView *animationView = (LottieAnimationView *) animationUIView;
+    // play
+    [t playWithAnimationView:animationView];
+    // Skip waiting for the Lottie animation to finish
+    // To make the splash screen wait for the Lottie animation to finish set it to false
+    [RNSplashScreen setAnimationFinished:true];
+  }
+ 
+  return success;
+}
+// END OF CHANGES
+
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+...
+```
+
+<details>
+ <summary>For React Native version 0.69 or older</summary>
+
 ### First step(Download):
 
-Run `yarn add lottie-ios@3.2.3 react-native-lottie-splash-screen`
+Run `yarn add lottie-ios@3.2.3 react-native-lottie-splash-screen@1.1.2`
 
 ### Second step(Plugin Installation):
 
@@ -48,6 +241,8 @@ For android, the package will be linked automatically on build.
 ### React Native <= v0.59
 
 ```bash
+// React-Native <= 0.59
+
 react-native link react-native-lottie-splash-screen
 ```
 
@@ -57,11 +252,13 @@ If you don't want to use the methods above, you can always do Manual installatio
 
 ### Manual installation
 
-**Android:**
+**Android (React-Native < 0.70):**
 
 1. In your `android/settings.gradle` file, make the following additions:
 
 ```java
+// React-Native < 0.70
+
 include ':react-native-lottie-splash-screen'
 project(':react-native-lottie-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-lottie-splash-screen/android')
 ```
@@ -69,6 +266,8 @@ project(':react-native-lottie-splash-screen').projectDir = new File(rootProject.
 2. In your android/app/build.gradle file, add the `:react-native-lottie-splash-screen` project as a compile-time dependency:
 
 ```java
+// React-Native < 0.70
+
 ...
 dependencies {
     ...
@@ -79,6 +278,8 @@ dependencies {
 3. Update the MainApplication.java file to use `react-native-lottie-splash-screen` via the following changes:
 
 ```java
+// React-Native < 0.70
+
 // react-native-lottie-splash-screen >= 0.3.1
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 // react-native-lottie-splash-screen < 0.3.1
@@ -108,7 +309,7 @@ public class MainApplication extends Application implements ReactApplication {
 }
 ```
 
-**iOS:**
+**iOS: (React-Native < 0.70)**
 
 1. `cd ios`
 2. `run pod install`
@@ -129,6 +330,7 @@ public class MainApplication extends Application implements ReactApplication {
 Update the `MainActivity.java` to use `react-native-lottie-splash-screen` via the following changes:
 
 ```java
+// React-Native < 0.70
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen; // here
@@ -150,6 +352,7 @@ public class MainActivity extends ReactActivity {
 1. Create `Dynamic.swift` with the following contents:
 
 ```swift
+// React-Native < 0.70
 import UIKit
 import Foundation
 import Lottie
@@ -201,6 +404,7 @@ import Lottie
 4. Update `AppDelegate.mm` with the following additions: (for react-native@0.71 proceed to 4.1)
 
 ```obj-c
+// React-Native < 0.70
 
 #import "AppDelegate.h"
 
@@ -304,6 +508,9 @@ import Lottie
 
   return true
 ```
+
+</details>
+
 ## Getting started
 
 Import `react-native-lottie-splash-screen` in your JS file.
@@ -329,7 +536,7 @@ Create a file called `launch_screen.xml` in `app/src/main/res/layout` (create th
         android:id="@+id/lottie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:lottie_rawRes="@raw/loading"
+        app:lottie_rawRes="@raw/loading"    <--  Your file name
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
         />
@@ -350,8 +557,8 @@ You can create splash screens in the following folders:
 
 Drag your lottie files to Xcode Project. Click Finish. That's all.
 
-![](img/2022-07-09-16-40-46.png)
-![](img/2022-07-09-16-41-45.png)
+![](screenshot/2022-07-09-16-40-46.png)
+![](screenshot/2022-07-09-16-41-45.png)
 
 ## Expo bare workflow!!
 
@@ -398,6 +605,7 @@ import RootNavigator from "@navi/RootNavigator";
 
 const App = () => {
   useEffect(() => {
+    // Hide Lottie splash screen immediately; works when setAnimationFinished is true
     LottieSplashScreen.hide(); // here
   }, []);
   return <RootNavigator />;
